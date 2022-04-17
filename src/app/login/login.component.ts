@@ -3,6 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth/auth.service';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {AuthLoginInfo} from '../auth/login-info';
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,13 @@ import {AuthLoginInfo} from '../auth/login-info';
 })
 export class LoginComponent implements OnInit {
 
-  form: any = {};
+  form: FormGroup = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl(''),
+  });
+
+//  form: any = {};
   isLoggedIn = false;
-  isLoginFailed = false;
   errorMessage = '';
   role = '';
   private loginInfo: AuthLoginInfo | undefined;
@@ -30,9 +35,11 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.loginInfo = new AuthLoginInfo(
-      this.form.username,
-      this.form.password
+      this.form.value.username,
+      this.form.value.password
     );
+
+    console.log(this.form.value.username)
 
     this.authService.attemptAuth(this.loginInfo).subscribe(
       data => {
@@ -40,14 +47,14 @@ export class LoginComponent implements OnInit {
         this.tokenStorage.saveUsername(data.username);
         this.tokenStorage.saveAuthorities(data.role);
 
-        this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.role = this.tokenStorage.getAuthorities();
+        this.errorMessage = '';
         this.reloadPage();
       },
       error => {
-        this.errorMessage = error.error.message;
-        this.isLoginFailed = true;
+        // this.errorMessage = error.error.message;
+        this.errorMessage = "Invalid username or password";
       }
     );
   }

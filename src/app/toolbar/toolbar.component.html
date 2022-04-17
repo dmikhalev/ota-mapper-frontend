@@ -1,9 +1,11 @@
 <mat-toolbar>
-  <span>OTA Mapper</span>
+  <span routerLink="">OTA Mapper</span>
   <span class="example-spacer"></span>
   <div fxShow="true" fxHide.lt-md="true">
-    <a mat-button routerLink="/btn1">Btn1</a>
-    <a mat-button routerLink="/btn1">Btn1</a>
-    <a mat-button routerLink="/btn1">Btn1</a>
+    <a *ngIf="role === 'admin'" mat-button routerLink="/user-management">User management</a>
+    <a *ngIf="role" mat-button routerLink="/map/room-type">Map room types</a>
+    <a mat-button routerLink="/doc">Documentation</a>
+    <a *ngIf="!role" mat-button routerLink="auth/login">Login</a>
+    <a *ngIf="role" mat-button (click)="logout()">Logout</a>
   </div>
 </mat-toolbar>

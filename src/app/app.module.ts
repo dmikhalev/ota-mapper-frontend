@@ -15,6 +15,9 @@ import {httpInterceptorProviders} from "./auth/auth-interceptor";
 import {HomeComponent} from './home/home.component';
 import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
+import {AddUserDialog, EditUserDialog, UsersComponent} from './users/users.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import {MatCardModule} from "@angular/material/card";
     ToolbarComponent,
     LoginComponent,
     HomeComponent,
+    UsersComponent,
+    EditUserDialog,
+    AddUserDialog
   ],
   imports: [
     BrowserModule,
@@ -35,7 +41,9 @@ import {MatCardModule} from "@angular/material/card";
     MatInputModule,
     MatCardModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

@@ -3,13 +3,15 @@
   <p>
     <mat-form-field style="width: 100%">
       <mat-label>Username</mat-label>
-      <input matInput required [(ngModel)]="user.username">
+      <input matInput required [(ngModel)]="user.username" #username="ngModel">
+      <mat-error *ngIf="username.invalid">Field is required</mat-error>
     </mat-form-field>
   </p>
   <p>
     <mat-form-field style="width: 100%">
       <mat-label>Password</mat-label>
-      <input matInput [(ngModel)]="user.password">
+      <input matInput required [(ngModel)]="user.password" #password="ngModel">
+      <mat-error *ngIf="password.invalid">Field is required</mat-error>
     </mat-form-field>
   </p>
   <p>
@@ -33,5 +35,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancelClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="user" (click)="onAddClick(user)" cdkFocusInitial>Add</button>
+  <button mat-button [disabled]="username.invalid || password.invalid" [mat-dialog-close]="user" (click)="onAddClick(user)" cdkFocusInitial>Add</button>
 </div>

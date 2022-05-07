@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Select new rule for '{{mappedParameter.value}}'</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill" style="width: 100%">
+    <mat-label>Rule</mat-label>
+    <mat-select [formControl]="ruleControl">
+      <mat-optgroup *ngFor="let group of ruleGroups" [label]="group.name"
+                    [disabled]="group.disabled">
+        <mat-option *ngFor="let rule of group.rule" [value]="rule">
+          {{rule.paramName + ' [' + rule.regExp + ']'}}
+        </mat-option>
+      </mat-optgroup>
+    </mat-select>
+  </mat-form-field>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="ruleControl.value" (click)="onOkClick(ruleControl.value)" cdkFocusInitial>Ok
+  </button>
+</div>

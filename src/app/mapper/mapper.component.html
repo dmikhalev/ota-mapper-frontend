@@ -10,7 +10,7 @@
   <div class="save-dictionary-block" *ngIf="mappedParametersWithUniqueValue.length>0">
     <form [formGroup]="form" (ngSubmit)="saveDictionary()">
       <mat-form-field>
-        <input type="text" matInput placeholder="Dictionary name" formControlName="dictionaryName">
+        <input type="text" matInput required placeholder="Dictionary name" formControlName="dictionaryName">
       </mat-form-field>
       <button type="submit" class="save-button" mat-raised-button color="primary" mat-button>Save</button>
     </form>
@@ -18,7 +18,7 @@
 </div>
 
 <div *ngIf="mappedParametersWithUniqueValue.length > 0 && dataSource != null" class="parameters-table-block">
-  <h3>Mapped unique parameters</h3>
+  <h3>Mapped parameters</h3>
 
   <mat-form-field appearance="standard" class="parameter-filter-field">
     <mat-label>Filter</mat-label>
@@ -59,7 +59,7 @@
     <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <button mat-icon-button color="accent">
+        <button mat-icon-button color="accent" (click)="openChangeRuleDialog(element)">
           <mat-icon *ngIf="element.rules[0].regExp != ''">edit</mat-icon>
           <mat-icon *ngIf="element.rules[0].regExp === ''">add</mat-icon>
         </button>

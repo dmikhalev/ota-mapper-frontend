@@ -1,28 +1,26 @@
 <h1 mat-dialog-title>Edit user '{{user.username}}'</h1>
 <div mat-dialog-content>
   <p>
-    <mat-form-field>
+    <mat-form-field style="width: 100%">
       <mat-label>Name</mat-label>
       <input matInput [(ngModel)]="user.name">
     </mat-form-field>
   </p>
   <p>
-    <mat-form-field>
+    <mat-form-field style="width: 100%">
       <mat-label>Email</mat-label>
       <input type="email" matInput [(ngModel)]="user.email">
     </mat-form-field>
   </p>
   <p>
-    <mat-form-field>
+    <mat-form-field style="width: 100%">
       <mat-label>Phone</mat-label>
       <input matInput [(ngModel)]="user.phone">
     </mat-form-field>
   </p>
 </div>
-<div>
-  <button mat-button (click)="onDeleteClick()">Delete</button>
-</div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button (click)="onDeleteClick()">Delete</button>
   <button mat-button [mat-dialog-close]="user" (click)="onOkClick(user)" cdkFocusInitial>Ok</button>
 </div>

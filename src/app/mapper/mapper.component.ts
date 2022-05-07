@@ -5,6 +5,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
 import {RuleService} from "../services/rule.service";
+import {ChangeRuleDialogComponent} from "./change-rule-dialog/change-rule-dialog.component";
 
 @Component({
   selector: 'app-mapper',
@@ -86,5 +87,16 @@ export class MapperComponent implements OnInit {
 
   saveDictionary(): void {
     //toDo  !!!
+  }
+
+  openChangeRuleDialog(mappedParameter: MappedParameter): void {
+    const dialogRef = this.dialog.open(ChangeRuleDialogComponent, {
+      width: '600px',
+      data: mappedParameter,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
   }
 }

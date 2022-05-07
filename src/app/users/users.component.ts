@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {UserService} from "../services/user.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {User} from "../entities/user";
-import {timeout} from "rxjs";
 
 @Component({
   selector: 'app-users',
@@ -33,7 +32,7 @@ export class UsersComponent implements OnInit {
       "phone": user.phone
     }
     const dialogRef = this.dialog.open(EditUserDialog, {
-      width: '250px',
+      width: '400px',
       data: editedUser
     });
 
@@ -44,11 +43,13 @@ export class UsersComponent implements OnInit {
 
   openAddUserDialog(): void {
     const dialogRef = this.dialog.open(AddUserDialog, {
-      width: '250px',
+      width: '400px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.users.push(result);
+      if (result != null) {
+        this.users.push(result);
+      }
       this.loadUsers();
     });
   }
@@ -105,7 +106,7 @@ export class AddUserDialog {
   }
 
   constructor(
-    public dialogRef: MatDialogRef<EditUserDialog>,
+    public dialogRef: MatDialogRef<AddUserDialog>,
     private userService: UserService
   ) {
   }

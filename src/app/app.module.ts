@@ -18,6 +18,10 @@ import {MatCardModule} from "@angular/material/card";
 import {AddUserDialog, EditUserDialog, UsersComponent} from './users/users.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatDialogModule} from "@angular/material/dialog";
+import {MapperComponent} from './mapper/mapper.component';
+import {MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
+import { ChangeRuleComponent } from './change-rule/change-rule.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,9 @@ import {MatDialogModule} from "@angular/material/dialog";
     HomeComponent,
     UsersComponent,
     EditUserDialog,
-    AddUserDialog
+    AddUserDialog,
+    MapperComponent,
+    ChangeRuleComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +49,9 @@ import {MatDialogModule} from "@angular/material/dialog";
     FormsModule,
     ReactiveFormsModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {UserService} from "../services/user.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {User} from "./user";
+import {User} from "../entities/user";
 import {timeout} from "rxjs";
 
 @Component({
@@ -48,14 +48,13 @@ export class UsersComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.users.push(result);
       this.loadUsers();
     });
   }
 
   private loadUsers(): void {
-    this.userService.getAllUsers().pipe(
-      timeout(100)
-    ).subscribe(data => {
+    this.userService.getAllUsers().subscribe(data => {
       this.users = data;
     })
   }
@@ -78,7 +77,6 @@ export class EditUserDialog {
   }
 
   onDeleteClick(): void {
-    console.log(this.user.id)
     this.userService.deleteUser(this.user.id);
     this.dialogRef.close();
   }

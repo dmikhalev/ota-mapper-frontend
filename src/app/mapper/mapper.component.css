@@ -1,0 +1,26 @@
+.tab-header {
+  padding: 10px;
+}
+
+.save-dictionary-block {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.save-button {
+  margin-left: 10px;
+}
+
+.parameters-table-block {
+  width: 80%;
+  padding-left: 10%;
+}
+
+.parameters-table {
+  width: 100%;
+}
+
+.parameter-filter-field {
+  width: 100%;
+}
+

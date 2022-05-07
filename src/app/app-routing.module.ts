@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import {HomeComponent} from "./home/home.component";
 import {UsersComponent} from "./users/users.component";
+import {MapperComponent} from "./mapper/mapper.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'user-management',
     component: UsersComponent
+  },
+  {
+    path: 'map/room-type',
+    component: MapperComponent
   },
 
   // {

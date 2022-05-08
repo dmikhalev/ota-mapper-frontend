@@ -1,36 +1,33 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {MapperService} from "../services/mapper.service";
 import {MappedParameter} from "../entities/mapped-parameter";
-import {FormControl, FormGroup} from "@angular/forms";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
-import {RuleService} from "../services/rule.service";
 import {ChangeRuleDialogComponent} from "./change-rule-dialog/change-rule-dialog.component";
+import {OtaParameter} from "../entities/ota-parameter";
+import {OtaDictionary} from "../entities/ota-dictionary";
+import {OtaDictionaryService} from "../services/ota-dictionary.service";
+
 
 @Component({
   selector: 'app-mapper',
   templateUrl: './mapper.component.html',
   styleUrls: ['./mapper.component.css']
 })
-export class MapperComponent implements OnInit {
+export class MapperComponent {
+
   displayedColumns: string[] = ['paramName', 'value', 'regExp', 'edit'];
-
-  form: FormGroup = new FormGroup({
-    dictionaryName: new FormControl('')
-  });
-
+  dictionaryName: string = ''
   dataSource = null;
+  isDictionarySaved: boolean = false
 
   mappedParameters: MappedParameter[] = []
   mappedParametersWithUniqueValue: MappedParameter[] = []
 
   constructor(
     private mapperService: MapperService,
-    private ruleService: RuleService,
+    private dictionaryService: OtaDictionaryService,
     public dialog: MatDialog) {
-  }
-
-  ngOnInit(): void {
   }
 
   applyFilter(event: Event) {
@@ -40,6 +37,7 @@ export class MapperComponent implements OnInit {
   }
 
   mapRoomTypeCSV(files: FileList) {
+    this.isDictionarySaved = false;
     if (files && files.length > 0) {
       let file: File = <File>files.item(0);
       console.log(file.name);
@@ -86,8 +84,43 @@ export class MapperComponent implements OnInit {
   }
 
   saveDictionary(): void {
-    //toDo  !!!
+    if (!confirm("Are you sure to save the dictionary?")) {
+      return;
+    }
+    let ruleMap = new Map();
+    for (const mp of this.mappedParametersWithUniqueValue) {
+      if (mp.rules[0].id == null) {
+        alert('Dictionary has not been saved\nPlease choose a rule for value \'' + mp.value + '\'')
+        return;
+      }
+      ruleMap.set(mp.value, mp.rules[0].id)
+    }
+
+    let otaParameters: OtaParameter[] = [];
+    this.mappedParameters.forEach(mp => {
+      let param: OtaParameter = {
+        "id": null,
+        "value": mp.value,
+        "additionalDetails": mp.additionalDetails,
+        "ruleId": ruleMap.get(mp.value),
+      }
+      otaParameters.push(param);
+    })
+
+    let otaDictionary: OtaDictionary = {
+      "id": null,
+      "name": this.dictionaryName,
+      "otaParameters": otaParameters
+    }
+    this.dictionaryService.saveOTADictionary(otaDictionary);
+
+    this.dataSource = null
+    this.dictionaryName = ''
+    this.mappedParameters = []
+    this.mappedParametersWithUniqueValue = []
+    this.isDictionarySaved = true
   }
+
 
   openChangeRuleDialog(mappedParameter: MappedParameter): void {
     const dialogRef = this.dialog.open(ChangeRuleDialogComponent, {

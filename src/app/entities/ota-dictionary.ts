@@ -1,13 +1,13 @@
 import {OtaParameter} from "./ota-parameter";
 
 export class OtaDictionary {
-  id: number;
-  additionalDetails: string;
-  parameters: OtaParameter[];
+  id: number | null;
+  name: string;
+  otaParameters: OtaParameter[];
 
-  constructor(id: number, additionalDetails: string, parameters: OtaParameter[]) {
+  constructor(id: number, name: string, otaParameters: OtaParameter[]) {
     this.id = id;
-    this.additionalDetails = additionalDetails;
-    this.parameters = parameters;
+    this.name = name;
+    this.otaParameters = otaParameters;
   }
 }

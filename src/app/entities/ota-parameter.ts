@@ -1,5 +1,5 @@
 export class OtaParameter {
-  id: number;
+  id: number | null;
   value: string;
   additionalDetails: string;
   ruleId: number;

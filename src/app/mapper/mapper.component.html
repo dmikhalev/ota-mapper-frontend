@@ -1,19 +1,24 @@
 <div class="tab-header">
   <h1>Users tab</h1>
 
-  <button mat-raised-button color="accent" (click)="fileInput.click()">
+  <button mat-raised-button color="accent" (click)="fileInput.click(); fileInput.value = ''">
     <span>Map Room type</span>
     <input #fileInput type="file" class="file-upload" style="display:none;"
            (change)="mapRoomTypeCSV($any($event.target).files)">
   </button>
 
   <div class="save-dictionary-block" *ngIf="mappedParametersWithUniqueValue.length>0">
-    <form [formGroup]="form" (ngSubmit)="saveDictionary()">
-      <mat-form-field>
-        <input type="text" matInput required placeholder="Dictionary name" formControlName="dictionaryName">
-      </mat-form-field>
-      <button type="submit" class="save-button" mat-raised-button color="primary" mat-button>Save</button>
-    </form>
+    <mat-form-field>
+      <input id="dictionaryName" name="dictionaryName" type="text" matInput required placeholder="Dictionary name"
+             [(ngModel)]="dictionaryName" #dictName="ngModel">
+      <mat-error *ngIf="dictName.invalid">Field is required</mat-error>
+    </mat-form-field>
+    <button type="submit" class="save-button" mat-raised-button color="primary" mat-button
+            [disabled]="dictName.invalid" (click)="saveDictionary()">Save
+    </button>
+  </div>
+  <div class="saved-dictionary-text-block" *ngIf="isDictionarySaved">
+    <h3>OTA dictionary saved successfully</h3>
   </div>
 </div>
 

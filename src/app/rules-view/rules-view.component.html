@@ -1,0 +1,42 @@
+<div class="tab-label">
+  <h1>Mapping rules tab</h1>
+  <button class="add-button" mat-button (click)="openAddRuleDialog()">Add rule</button>
+</div>
+
+<div class="rules-table-block">
+  <table mat-table [dataSource]="this.rules" class="mat-elevation-z8 demo-table">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{element.name}}</td>
+    </ng-container>
+
+    <!-- Parameter Column -->
+    <ng-container matColumnDef="paramName">
+      <th mat-header-cell *matHeaderCellDef>Parameter</th>
+      <td mat-cell *matCellDef="let element">{{element.paramName}}</td>
+    </ng-container>
+
+    <!-- Code Column -->
+    <ng-container matColumnDef="code">
+      <th mat-header-cell *matHeaderCellDef>OTA Code</th>
+      <td mat-cell *matCellDef="let element">{{element.code}}</td>
+    </ng-container>
+
+    <!-- Regular expression Column -->
+    <ng-container matColumnDef="regExp">
+      <th mat-header-cell *matHeaderCellDef>Regular expression</th>
+      <td mat-cell *matCellDef="let element">{{element.regExp}}</td>
+    </ng-container>
+
+    <!-- Priority Column -->
+    <ng-container matColumnDef="priority">
+      <th mat-header-cell *matHeaderCellDef>Priority</th>
+      <td mat-cell *matCellDef="let element">{{element.priority}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

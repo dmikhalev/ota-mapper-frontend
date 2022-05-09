@@ -24,6 +24,8 @@ import {MatSelectModule} from "@angular/material/select";
 import {ChangeRuleDialogComponent} from './mapper/change-rule-dialog/change-rule-dialog.component';
 import {OtaDictionariesComponent, RenameOtaDictionaryDialog} from './ota-dictionaries/ota-dictionaries.component';
 import {MatGridListModule} from "@angular/material/grid-list";
+import {RulesViewComponent} from './rules-view/rules-view.component';
+import {AddRuleDialogComponent} from './add-rule-dialog/add-rule-dialog.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import {MatGridListModule} from "@angular/material/grid-list";
     MapperComponent,
     ChangeRuleDialogComponent,
     OtaDictionariesComponent,
-    RenameOtaDictionaryDialog
+    RenameOtaDictionaryDialog,
+    RulesViewComponent,
+    AddRuleDialogComponent
   ],
   imports: [
     BrowserModule,

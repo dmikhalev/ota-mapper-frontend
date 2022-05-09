@@ -13,18 +13,18 @@ export class RuleService {
 
   private getRuleOfParamUrl = 'http://localhost:8080/api/v1/rules_of_param/'
   private getAllRulesUrl = 'http://localhost:8080/api/v1/rules'
-  private createOrUpdateRuleUrl = 'http://localhost:8080/api/v1/rule'
+  private createOrUpdateRuleUrl = 'http://localhost:8080/api/v1/rule/create_or_update'
+  private validateRuleRegExpUrl = 'http://localhost:8080/api/v1/rule/validate'
 
   constructor(private http: HttpClient) {
   }
 
   getRuleOfParam = (paramName: string) => this.http.get<Rule[]>(`${this.getRuleOfParamUrl}${paramName}`, httpOptions)
-    .subscribe(res => console.log(res));
 
   getAllRules = () => this.http.get<Rule[]>(this.getAllRulesUrl, httpOptions)
-  //.subscribe(res => console.log(res));
 
   createOrUpdateRule = (rule: string) => this.http.post(this.createOrUpdateRuleUrl, rule, httpOptions)
-    .subscribe(res => console.log(res));
+
+  validateRuleRegExp = (regExp: string) => this.http.post(this.validateRuleRegExpUrl, `{"regExp":"${regExp}"}`, httpOptions)
 
 }

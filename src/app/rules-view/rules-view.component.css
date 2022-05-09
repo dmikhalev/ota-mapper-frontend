@@ -1,0 +1,27 @@
+.demo-table {
+  width: 100%;
+}
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
+}
+
+.tab-label {
+  padding: 10px;
+}
+
+.add-button {
+  margin-right: 10px;
+  margin-left: 10%;
+}
+
+.rules-table-block {
+  width: 80%;
+  padding-left: 10%;
+}

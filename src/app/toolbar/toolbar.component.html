@@ -4,6 +4,7 @@
   <div fxShow="true" fxHide.lt-md="true">
     <a *ngIf="role === 'admin'" mat-button routerLink="/user-management">User management</a>
     <a *ngIf="role" mat-button routerLink="/ota-dictionaries">OTA Dictionaries</a>
+    <a *ngIf="role" mat-button routerLink="/rules">Mapping rules</a>
     <a *ngIf="role" mat-button routerLink="/map/room-type">Map room types</a>
     <a mat-button routerLink="/doc">Documentation</a>
     <a *ngIf="!role" mat-button routerLink="auth/login">Login</a>

@@ -26,6 +26,7 @@ import {OtaDictionariesComponent, RenameOtaDictionaryDialog} from './ota-diction
 import {MatGridListModule} from "@angular/material/grid-list";
 import {RulesViewComponent} from './rules-view/rules-view.component';
 import {AddRuleDialogComponent} from './add-rule-dialog/add-rule-dialog.component';
+import { DocumentationComponent } from './documentation/documentation.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {AddRuleDialogComponent} from './add-rule-dialog/add-rule-dialog.componen
     OtaDictionariesComponent,
     RenameOtaDictionaryDialog,
     RulesViewComponent,
-    AddRuleDialogComponent
+    AddRuleDialogComponent,
+    DocumentationComponent
   ],
   imports: [
     BrowserModule,

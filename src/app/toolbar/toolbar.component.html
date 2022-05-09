@@ -6,7 +6,7 @@
     <a *ngIf="role" mat-button routerLink="/ota-dictionaries">OTA Dictionaries</a>
     <a *ngIf="role" mat-button routerLink="/rules">Mapping rules</a>
     <a *ngIf="role" mat-button color="accent" routerLink="/map/room-type">Map room types</a>
-    <a mat-button routerLink="/doc">Documentation</a>
+    <a mat-button routerLink="/documentation">Documentation</a>
     <a *ngIf="!role" mat-button routerLink="auth/login">Login</a>
     <a *ngIf="role" mat-button (click)="logout()">Logout</a>
   </div>

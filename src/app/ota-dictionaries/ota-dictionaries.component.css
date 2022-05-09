@@ -8,7 +8,18 @@
   display: inline-block;
   vertical-align: bottom;
   margin-left: 2px;
+  width: 95%;
+}
+
+.dictionary-name-block {
+  display: inline-block;
+  vertical-align: bottom;
+  margin-left: 2px;
   width: 65%;
+}
+
+.close-parameters-button {
+  text-align: right;
 }
 
 .dictionaries-table {
@@ -21,6 +32,7 @@
 .mat-column-name {
   flex: 0 0 70%;
 }
+
 .mat-column-edit {
   flex: 0 0 30%;
 }

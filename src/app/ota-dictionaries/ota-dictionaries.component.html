@@ -2,8 +2,12 @@
   <div class="tab-name">
     <h1>OTA Dictionaries</h1>
   </div>
-  <div class="dictionary-name">
+  <div class="dictionary-name-block">
     <p class="dictionary-name">{{dictionaryName}}</p>
+    <button *ngIf="otaParameters.length>0" mat-icon-button class="close-parameters-button"
+            (click)="closeParametersTable()">
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
 </div>
 

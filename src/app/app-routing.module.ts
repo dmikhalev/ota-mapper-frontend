@@ -37,11 +37,6 @@ const routes: Routes = [
     path: 'map/room-type',
     component: MapperComponent
   },
-
-  // {
-  //   path: '',
-  //   loadChildren: () => import('./_pages/users/users.module').then(m => m.UsersModule)
-  // }
 ];
 
 @NgModule({

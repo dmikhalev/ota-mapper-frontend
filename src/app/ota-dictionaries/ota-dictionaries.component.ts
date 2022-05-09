@@ -76,6 +76,11 @@ export class OtaDictionariesComponent implements OnInit {
     });
   }
 
+  closeParametersTable(): void {
+    this.otaParameters = [];
+    this.dictionaryName = '';
+  }
+
 }
 
 

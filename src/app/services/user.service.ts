@@ -21,8 +21,6 @@ export class UserService {
   getAllUsers = () => this.http.get<User[]>(this.getAllUsersUrl, httpOptions);
 
   createOrUpdateUser = (user: string) => this.http.post(this.createOrUpdateUserUrl, user, httpOptions)
-    .subscribe(res => console.log(res));
 
   deleteUser = (id: number) => this.http.post(this.deleteUserUrl, id, httpOptions)
-    .subscribe(res => console.log(res));
 }

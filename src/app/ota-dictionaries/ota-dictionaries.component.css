@@ -1,0 +1,33 @@
+.tab-name {
+  display: inline-block;
+  width: 30%;
+  margin: 10px;
+}
+
+.dictionary-name {
+  display: inline-block;
+  vertical-align: bottom;
+  margin-left: 2px;
+  width: 65%;
+}
+
+.dictionaries-table {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 10px;
+  width: 30%;
+}
+
+.mat-column-name {
+  flex: 0 0 70%;
+}
+.mat-column-edit {
+  flex: 0 0 30%;
+}
+
+.parameters-table {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 10px;
+  width: 68%;
+}

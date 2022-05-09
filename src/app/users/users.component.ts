@@ -78,12 +78,15 @@ export class EditUserDialog {
   }
 
   onDeleteClick(): void {
-    this.userService.deleteUser(this.user.id);
-    this.dialogRef.close();
+    this.userService.deleteUser(this.user.id).subscribe(result => {
+      this.dialogRef.close();
+    })
   }
 
   onOkClick(user: User): void {
-    this.userService.createOrUpdateUser(JSON.stringify(user));
+    this.userService.createOrUpdateUser(JSON.stringify(user)).subscribe(result => {
+      this.dialogRef.close();
+    });
     this.dialogRef.close();
   }
 }
@@ -117,7 +120,8 @@ export class AddUserDialog {
 
 
   onAddClick(user: User): void {
-    this.userService.createOrUpdateUser(JSON.stringify(user));
-    this.dialogRef.close();
+    this.userService.createOrUpdateUser(JSON.stringify(user)).subscribe(result => {
+      this.dialogRef.close();
+    });
   }
 }

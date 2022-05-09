@@ -4,6 +4,7 @@ import {LoginComponent} from "./login/login.component";
 import {HomeComponent} from "./home/home.component";
 import {UsersComponent} from "./users/users.component";
 import {MapperComponent} from "./mapper/mapper.component";
+import {OtaDictionariesComponent} from "./ota-dictionaries/ota-dictionaries.component";
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'user-management',
     component: UsersComponent
+  },
+  {
+    path: 'ota-dictionaries',
+    component: OtaDictionariesComponent
   },
   {
     path: 'map/room-type',

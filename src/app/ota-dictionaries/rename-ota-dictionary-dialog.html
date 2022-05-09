@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Rename OTA Dictionary</h1>
+<div mat-dialog-content>
+  <p>
+    <mat-form-field style="width: 100%">
+      <mat-label>Name</mat-label>
+      <input id="dictionaryName" name="dictionaryName" type="text" matInput required placeholder="Dictionary name"
+             [(ngModel)]="otaDictionary.name" #dictName="ngModel">
+      <mat-error *ngIf="dictName.invalid">Field is required</mat-error>
+    </mat-form-field>
+  </p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="otaDictionary.name" [disabled]="dictName.invalid" (click)="onOkClick(otaDictionary)"
+          cdkFocusInitial>Ok
+  </button>
+</div>

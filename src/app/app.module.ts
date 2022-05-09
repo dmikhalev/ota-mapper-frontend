@@ -19,9 +19,11 @@ import {AddUserDialog, EditUserDialog, UsersComponent} from './users/users.compo
 import {MatTableModule} from "@angular/material/table";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MapperComponent} from './mapper/mapper.component';
-import {MatOptionModule} from "@angular/material/core";
+import {MatOptionModule, MatRippleModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {ChangeRuleDialogComponent} from './mapper/change-rule-dialog/change-rule-dialog.component';
+import {OtaDictionariesComponent, RenameOtaDictionaryDialog} from './ota-dictionaries/ota-dictionaries.component';
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import {ChangeRuleDialogComponent} from './mapper/change-rule-dialog/change-rule
     EditUserDialog,
     AddUserDialog,
     MapperComponent,
-    ChangeRuleDialogComponent
+    ChangeRuleDialogComponent,
+    OtaDictionariesComponent,
+    RenameOtaDictionaryDialog
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,9 @@ import {ChangeRuleDialogComponent} from './mapper/change-rule-dialog/change-rule
     MatTableModule,
     MatDialogModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatRippleModule,
+    MatGridListModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

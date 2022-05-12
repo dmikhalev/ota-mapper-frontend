@@ -12,7 +12,6 @@ import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {httpInterceptorProviders} from "./auth/auth-interceptor";
-import {HomeComponent} from './home/home.component';
 import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
 import {AddUserDialog, EditUserDialog, UsersComponent} from './users/users.component';
@@ -33,7 +32,6 @@ import { DocumentationComponent } from './documentation/documentation.component'
     AppComponent,
     ToolbarComponent,
     LoginComponent,
-    HomeComponent,
     UsersComponent,
     EditUserDialog,
     AddUserDialog,

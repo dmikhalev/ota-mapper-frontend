@@ -1,24 +1,20 @@
 <h1 mat-dialog-title>Create Mapping rule</h1>
 <div mat-dialog-content>
   <p>
-    <mat-form-field style="width: 100%">
+    <mat-form-field appearance="fill" style="width: 100%">
       <mat-label>Parameter</mat-label>
-      <input matInput required [(ngModel)]="rule.paramName" #paramName="ngModel">
-      <mat-error *ngIf="paramName.invalid">Field is required</mat-error>
+      <mat-select [formControl]="paramControl">
+        <mat-option *ngFor="let param of params" [value]="param">
+          {{param.paramName + ' ' + param.code}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
   </p>
   <p>
     <mat-form-field style="width: 100%">
-      <mat-label>Regular expression</mat-label>
+      <mat-label>Rule expression</mat-label>
       <input matInput required [(ngModel)]="rule.regExp" #regExp="ngModel">
       <mat-error *ngIf="regExp.invalid">Field is required</mat-error>
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field style="width: 100%">
-      <mat-label>OTA Code</mat-label>
-      <input matInput type="number" required [(ngModel)]="rule.code" #code="ngModel">
-      <mat-error *ngIf="code.invalid">Field is required</mat-error>
     </mat-form-field>
   </p>
   <p>
@@ -31,7 +27,7 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancelClick()">Cancel</button>
-  <button mat-button [disabled]="paramName.invalid || regExp.invalid || code.invalid || priority.invalid"
+  <button mat-button [disabled]="regExp.invalid || priority.invalid"
           (click)="onAddClick()">Add
   </button>
 </div>

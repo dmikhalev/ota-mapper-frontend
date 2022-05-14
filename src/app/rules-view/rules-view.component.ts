@@ -30,6 +30,7 @@ export class RulesViewComponent implements OnInit {
   openAddRuleDialog(): void {
     const dialogRef = this.dialog.open(AddRuleDialogComponent, {
       width: '400px',
+      data: ''
     });
 
     dialogRef.afterClosed().subscribe(result => {

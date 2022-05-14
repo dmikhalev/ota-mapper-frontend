@@ -1,9 +1,10 @@
 import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {RuleService} from "../../services/rule.service";
 import {Rule} from "../../entities/rule";
 import {MappedParameter} from "../../entities/mapped-parameter";
 import {FormControl} from "@angular/forms";
+import {AddRuleDialogComponent, InitialAddRuleData} from "../../add-rule-dialog/add-rule-dialog.component";
 
 interface RuleGroup {
   disabled?: boolean;
@@ -25,7 +26,8 @@ export class ChangeRuleDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<ChangeRuleDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public mappedParameter: MappedParameter,
-    private ruleService: RuleService
+    private ruleService: RuleService,
+    public dialog: MatDialog
   ) {
     this.ruleService.getAllRules().subscribe(res => {
       this.ruleGroups = [
@@ -69,5 +71,21 @@ export class ChangeRuleDialogComponent {
     }
     this.mappedParameter.rules = rules;
     this.dialogRef.close();
+  }
+
+  openAddRuleDialog(): void {
+    let initialRegExp = '\'' + this.mappedParameter.value.split(' ').join('\' AND \'') + '\''
+    let data: InitialAddRuleData = {
+      "paramName": this.mappedParameter.value,
+      "regExp": initialRegExp
+    }
+    const dialogRef = this.dialog.open(AddRuleDialogComponent, {
+      width: '400px',
+      data: data
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.dialogRef.close();
+    });
   }
 }

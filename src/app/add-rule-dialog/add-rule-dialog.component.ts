@@ -1,7 +1,18 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {Rule} from "../entities/rule";
-import {MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {RuleService} from "../services/rule.service";
+import {FormControl} from "@angular/forms";
+
+export interface InitialAddRuleData {
+  paramName: string,
+  regExp: string,
+}
+
+export interface ParamCodePair {
+  paramName: string,
+  code: string,
+}
 
 @Component({
   selector: 'app-add-rule-dialog',
@@ -9,6 +20,9 @@ import {RuleService} from "../services/rule.service";
   styleUrls: ['./add-rule-dialog.component.css']
 })
 export class AddRuleDialogComponent {
+
+  paramControl = new FormControl();
+  params: ParamCodePair[] = []
 
   rule: Rule = {
     "id": null,
@@ -22,8 +36,14 @@ export class AddRuleDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<AddRuleDialogComponent>,
-    private ruleService: RuleService
+    private ruleService: RuleService,
+    @Inject(MAT_DIALOG_DATA) public data: InitialAddRuleData,
   ) {
+    if (data != null) {
+      this.rule.regExp = data.regExp;
+      this.rule.paramName = data.paramName;
+    }
+    this.loadRoomTypeDictionary();
   }
 
   onCancelClick(): void {
@@ -31,15 +51,24 @@ export class AddRuleDialogComponent {
   }
 
   onAddClick(): void {
-    this.ruleService.validateRuleRegExp(this.rule.regExp).subscribe(valid => {
-      console.log(valid)
+    let regExp = 'IF ' + this.rule.regExp + ' THEN ' + this.rule.code;
+    this.ruleService.validateRuleRegExp(regExp).subscribe(valid => {
       if (valid) {
+        this.rule.regExp = regExp;
+        this.rule.paramName = this.paramControl.value.paramName;
+        this.rule.code = this.paramControl.value.code;
         this.ruleService.createOrUpdateRule(JSON.stringify(this.rule)).subscribe(result => {
           this.dialogRef.close();
         });
       } else {
-        alert("Wrong regular expression pattern.")
+        alert("Wrong rule pattern.")
       }
+    })
+  }
+
+  loadRoomTypeDictionary(): void {
+    this.ruleService.getRoomTypeDictionary().subscribe(result => {
+      this.params = result;
     })
   }
 

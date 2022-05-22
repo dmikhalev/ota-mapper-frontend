@@ -1,0 +1,34 @@
+<div class="tab-label">
+  <h1>Organizations tab</h1>
+  <button class="add-button" mat-button (click)="openAddOrganizationDialog()">Add organization</button>
+</div>
+
+<div class="organizations-table-block">
+
+  <table mat-table [dataSource]="this.organizations" class="mat-elevation-z8 demo-table">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{element.name}}</td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">{{element.email}}</td>
+    </ng-container>
+
+    <!-- Phone Column -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef>Phone</th>
+      <td mat-cell *matCellDef="let element">{{element.phone}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row
+        (click)="openEditOrganizationDialog(row)"
+        *matRowDef="let row; columns: displayedColumns;"
+    ></tr>
+  </table>
+</div>

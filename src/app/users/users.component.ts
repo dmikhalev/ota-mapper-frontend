@@ -2,6 +2,9 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {UserService} from "../services/user.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {User} from "../entities/user";
+import {OrganizationService} from "../services/organization.service";
+import {FormControl} from "@angular/forms";
+import {Organization} from "../entities/organization";
 
 @Component({
   selector: 'app-users',
@@ -10,9 +13,8 @@ import {User} from "../entities/user";
 })
 export class UsersComponent implements OnInit {
 
-  displayedColumns: string[] = ['username', 'role', 'name', 'email', 'phone'];
+  displayedColumns: string[] = ['username', 'role', 'name', 'email', 'phone', 'organization'];
   users: User[] = [];
-  clickedUser: User | undefined
 
   constructor(private userService: UserService, public dialog: MatDialog) {
   }
@@ -29,7 +31,8 @@ export class UsersComponent implements OnInit {
       "role": user.role,
       "name": user.name,
       "email": user.email,
-      "phone": user.phone
+      "phone": user.phone,
+      "organization": user.organization
     }
     const dialogRef = this.dialog.open(EditUserDialog, {
       width: '400px',
@@ -85,9 +88,8 @@ export class EditUserDialog {
 
   onOkClick(user: User): void {
     this.userService.createOrUpdateUser(JSON.stringify(user)).subscribe(result => {
-      this.dialogRef.close();
+      this.dialogRef.close(user);
     });
-    this.dialogRef.close();
   }
 }
 
@@ -98,20 +100,26 @@ export class EditUserDialog {
 })
 export class AddUserDialog {
 
+  organizationControl = new FormControl();
+  organizations: Organization[] = []
+
   user: User = {
     "id": -1,
     "username": '',
     "password": '',
     "role": '',
-    "name": '',
-    "email": '',
-    "phone": ''
+    "name": null,
+    "email": null,
+    "phone": null,
+    "organization": ''
   }
 
   constructor(
     public dialogRef: MatDialogRef<AddUserDialog>,
-    private userService: UserService
+    private userService: UserService,
+    private organizationService: OrganizationService
   ) {
+    this.loadOrganizations();
   }
 
   onCancelClick(): void {
@@ -120,8 +128,15 @@ export class AddUserDialog {
 
 
   onAddClick(user: User): void {
+    user.organization = this.organizationControl.value.name;
     this.userService.createOrUpdateUser(JSON.stringify(user)).subscribe(result => {
-      this.dialogRef.close();
+      this.dialogRef.close(user);
     });
+  }
+
+  loadOrganizations(): void {
+    this.organizationService.getAllOrganizations().subscribe(result => {
+      this.organizations = result;
+    })
   }
 }

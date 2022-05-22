@@ -17,7 +17,8 @@
   <p>
     <mat-form-field style="width: 100%">
       <mat-label>Name</mat-label>
-      <input matInput [(ngModel)]="user.name">
+      <input matInput required [(ngModel)]="user.name" #name="ngModel">
+      <mat-error *ngIf="password.invalid">Field is required</mat-error>
     </mat-form-field>
   </p>
   <p>
@@ -32,8 +33,20 @@
       <input matInput [(ngModel)]="user.phone">
     </mat-form-field>
   </p>
+  <p>
+    <mat-form-field appearance="fill" style="width: 100%">
+      <mat-label>Organization</mat-label>
+      <mat-select required [formControl]="organizationControl">
+        <mat-option *ngFor="let org of organizations" [value]="org">
+          {{org.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancelClick()">Cancel</button>
-  <button mat-button [disabled]="username.invalid || password.invalid" [mat-dialog-close]="user" (click)="onAddClick(user)" cdkFocusInitial>Add</button>
+  <button mat-button [disabled]="username.invalid || password.invalid || name.invalid" [mat-dialog-close]="user"
+          (click)="onAddClick(user)" cdkFocusInitial>Add
+  </button>
 </div>

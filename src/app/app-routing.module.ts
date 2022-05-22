@@ -6,6 +6,7 @@ import {MapperComponent} from "./mapper/mapper.component";
 import {OtaDictionariesComponent} from "./ota-dictionaries/ota-dictionaries.component";
 import {RulesViewComponent} from "./rules-view/rules-view.component";
 import {DocumentationComponent} from "./documentation/documentation.component";
+import {OrganizationsComponent} from "./organizations/organizations.component";
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'user-management',
     component: UsersComponent
+  },
+  {
+    path: 'organizations',
+    component: OrganizationsComponent
   },
   {
     path: 'ota-dictionaries',

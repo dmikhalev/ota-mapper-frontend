@@ -85,7 +85,7 @@ export class ChangeRuleDialogComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.dialogRef.close();
+      this.dialogRef.close(result);
     });
   }
 }

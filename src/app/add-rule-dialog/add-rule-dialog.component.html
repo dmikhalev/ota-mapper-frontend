@@ -3,7 +3,7 @@
   <p>
     <mat-form-field appearance="fill" style="width: 100%">
       <mat-label>Parameter</mat-label>
-      <mat-select [formControl]="paramControl">
+      <mat-select required [formControl]="paramControl">
         <mat-option *ngFor="let param of params" [value]="param">
           {{param.paramName + ' ' + param.code}}
         </mat-option>

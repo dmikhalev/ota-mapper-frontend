@@ -51,14 +51,14 @@ export class AddRuleDialogComponent {
   }
 
   onAddClick(): void {
-    let regExp = 'IF ' + this.rule.regExp + ' THEN ' + this.rule.code;
+    let regExp = 'IF ' + this.rule.regExp + ' THEN ' + this.paramControl.value.code;
     this.ruleService.validateRuleRegExp(regExp).subscribe(valid => {
       if (valid) {
         this.rule.regExp = regExp;
         this.rule.paramName = this.paramControl.value.paramName;
         this.rule.code = this.paramControl.value.code;
         this.ruleService.createOrUpdateRule(JSON.stringify(this.rule)).subscribe(result => {
-          this.dialogRef.close();
+          this.dialogRef.close(result);
         });
       } else {
         alert("Wrong rule pattern.")

@@ -25,7 +25,7 @@ export class RuleService {
 
   getAllRules = () => this.http.get<Rule[]>(this.getAllRulesUrl, httpOptions)
 
-  createOrUpdateRule = (rule: string) => this.http.post(this.createOrUpdateRuleUrl, rule, httpOptions)
+  createOrUpdateRule = (rule: string) => this.http.post<Rule>(this.createOrUpdateRuleUrl, rule, httpOptions)
 
   validateRuleRegExp = (regExp: string) => this.http.post(this.validateRuleRegExpUrl, `{"regExp":"${regExp}"}`, httpOptions)
 

@@ -129,7 +129,7 @@ export class MapperComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
+      mappedParameter.rules.unshift(result);
     });
   }
 }
